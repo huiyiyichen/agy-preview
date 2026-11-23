@@ -1,0 +1,12 @@
+{
+  "name": "agy-preview",
+  "displayName": "Agy Preview",
+  "version": "1.0.2",
+  "description": "High-fidelity in-app preview for DOCX, PPTX (with speaker notes), live HTML pages, and Codex-style inline chat image thumbnails in Google Antigravity 2.0.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Preview a local DOCX or PPTX presentation inside Antigravity",
+    "Render a local HTML file with live preview and source toggle",
+    "Inspect inline image thumbnails from agent read_file steps"
+  ]
+}

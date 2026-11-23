@@ -1,0 +1,26 @@
+{
+  "command": "node",
+  "args": [
+    "main.mjs"
+  ],
+  "env": {
+    "AGY_PREVIEW_VERSION": "1.0.0"
+  },
+  "restart_policy": "always",
+  "display_name": "Agy Preview",
+  "description": "High-fidelity DOCX/PPTX preview, live HTML renderer, and inline chat image thumbnails.",
+  "has_web_ui": true,
+  "agent_permissions": {
+    "allows_user_interactions": false
+  },
+  "ui_config": {
+    "display_name": "Agy Preview",
+    "views": [
+      {
+        "path": "/",
+        "entrypoint": "SIDECAR_UI_ENTRYPOINT_AUX_PANE",
+        "title": "Agy Preview"
+      }
+    ]
+  }
+}
