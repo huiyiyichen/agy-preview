@@ -342,6 +342,7 @@ test('browser DOM smoke test: in-place merged images, Side Question isolation, S
 
   const clientCode = readFileSync(new URL('../lib/client-inject.js', import.meta.url), 'utf8');
   const tinyPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
+  const iconSvg = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><rect width="128" height="128" fill="#a855f7"/></svg>');
   const pageHtml = `<!DOCTYPE html><html class="dark"><head><meta charset="utf-8"><style>
     body{margin:0;width:1280px;height:800px;display:flex;background:#141417;color:#f4f4f5}
     .dim-wrap{opacity:0.72}
@@ -359,9 +360,9 @@ test('browser DOM smoke test: in-place merged images, Side Question isolation, S
             </div>
           </div>
           <div data-markdown-root="1">
-            <p id="md-p1">导出图见 <a href="file:///C:/tmp/map-export.png">map-export.png</a>。</p>
+            <p id="md-p1">导出图见 <img src="${iconSvg}" style="width:16px;height:16px" /><a href="file:///C:/tmp/map-export.png">map-export.png</a>。</p>
             <ul>
-              <li id="md-li1">实拍验收：桌面端见 <span data-uri="file:///C:/tmp/desktop.png">desktop.png</span>，手机端见 <a href="file:///C:/tmp/mobile375.png">mobile375.png</a>。</li>
+              <li id="md-li1">实拍验收：桌面端见 <span style="display:inline-flex;align-items:center"><img src="${iconSvg}" style="width:16px;height:16px" /><span data-uri="file:///C:/tmp/desktop.png">desktop.png</span></span>，手机端见 <img src="${iconSvg}" style="width:16px;height:16px" /><a href="file:///C:/tmp/mobile375.png">mobile375.png</a>，以及无 href 的纯芯片 <span>f3_thanks.png</span>。</li>
             </ul>
           </div>
         </div>
@@ -396,7 +397,7 @@ test('browser DOM smoke test: in-place merged images, Side Question isolation, S
     </div>
     <script>
       history.replaceState({}, '', '/c/demo-conversation-0001');
-      globalThis.__agyPreviewVersion = '1.0.2';
+      globalThis.__agyPreviewVersion = '1.0.3';
       globalThis.__agyPreviewInitialSettings = ${JSON.stringify(DEFAULT_SETTINGS)};
       globalThis.__agyPreviewHost = raw => {
         const req = JSON.parse(raw);
@@ -519,9 +520,9 @@ test('browser DOM smoke test: in-place merged images, Side Question isolation, S
     assert.equal(report.mixedRead2Hidden, null);
     assert.match(report.mixedStripText, /已查看 2 张图像/);
 
-    // 2b) Markdown reply image links render side-by-side rounded cards directly below paragraph/list item
+    // 2b) Markdown reply image links render side-by-side rounded cards even with 16px 128-naturalWidth file-badge <img> icons and plain <span> chips
     assert.equal(report.mdP1CardCount, 1);
-    assert.equal(report.mdLi1CardCount, 2);
+    assert.equal(report.mdLi1CardCount, 3);
     assert.equal(report.mdCardImgOpacity, '1');
     assert.equal(report.mdCardImgFilter, 'none');
 

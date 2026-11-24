@@ -1,7 +1,7 @@
 {
   "name": "agy-preview",
   "displayName": "Agy Preview",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "High-fidelity in-app preview for DOCX, PPTX (with speaker notes), live HTML pages, and Codex-style inline chat image thumbnails in Google Antigravity 2.0.",
   "logo": "assets/logo.svg",
   "suggestedPrompts": [
